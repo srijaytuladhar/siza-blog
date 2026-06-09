@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1e3a8a" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#g)" />
+  <circle cx="200" cy="350" r="120" fill="#38bdf8" opacity="0.1" />
+  <!-- Growing Bars representing SIP savings -->
+  <rect x="150" y="320" width="60" height="80" rx="6" fill="#38bdf8" opacity="0.5" />
+  <rect x="250" y="270" width="60" height="130" rx="6" fill="#38bdf8" opacity="0.7" />
+  <rect x="350" y="200" width="60" height="200" rx="6" fill="#38bdf8" opacity="0.9" />
+  <rect x="450" y="120" width="60" height="280" rx="6" fill="#10b981" />
+  <text x="80" y="80" font-family="system-ui, sans-serif" font-size="38" font-weight="bold" fill="#ffffff">Systematic Investment Plans (SIP)</text>
+  <text x="80" y="130" font-family="system-ui, sans-serif" font-size="20" fill="#94a3b8">The power of compounding in Nepal's mutual funds</text>
+</svg>

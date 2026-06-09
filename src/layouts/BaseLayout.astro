@@ -1,0 +1,107 @@
+---
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  canonicalURL?: string;
+  type?: 'website' | 'article';
+  publishedTime?: string;
+  authorName?: string;
+}
+
+const {
+  title,
+  description,
+  image = '/images/og-default.jpg', // Fallback default card image
+  canonicalURL = Astro.url.href,
+  type = 'website',
+  publishedTime,
+  authorName = 'siza.dev Editorial Team'
+} = Astro.props;
+
+const siteName = 'siza.dev';
+
+// Programmatic JSON-LD Schema
+const schema = type === 'article' 
+  ? {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": title,
+      "description": description,
+      "image": [new URL(image, Astro.site).href],
+      "datePublished": publishedTime,
+      "author": {
+        "@type": "Person",
+        "name": authorName
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": siteName,
+        "logo": {
+          "@type": "ImageObject",
+          "url": new URL('/favicon.svg', Astro.site).href
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": canonicalURL
+      }
+    }
+  : {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": siteName,
+      "url": Astro.site?.href,
+      "description": description
+    };
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title} | {siteName}</title>
+    <meta name="title" content={`${title} | ${siteName}`} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={`${title} | ${siteName}`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={`${title} | ${siteName}`} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.site)} />
+
+    <!-- Google AdSense Ready Asynchronous Script -->
+    <!-- REPLACE 'ca-pub-XXXXXXXXXXXXXXXX' WITH YOUR REAL ADSENSE PUBLISHER ID -->
+    <script is:inline async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
+    <!-- Structured Data JSON-LD Schema -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <Navbar />
+    
+    <!-- Main Content Container with zero layout shifts (CLS) -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>

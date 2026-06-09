@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contact Us"
+  description="Get in touch with the editorial team at siza.dev for queries, feedback, or collaborative educational projects."
+>
+  <div class="max-w-3xl mx-auto py-8 md:py-12">
+    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-brand-50 text-tech-indigo border border-brand-200 uppercase tracking-wider mb-4 font-display">
+      ✉️ Get In Touch
+    </span>
+    <h1 class="text-4xl md:text-5xl font-display font-extrabold text-slate-900 tracking-tight mb-4">
+      Contact siza.dev
+    </h1>
+    <p class="text-slate-600 text-base md:text-lg mb-8 leading-relaxed">
+      Have a question about our developer guides, want to request a tutorial, or suggest a new tool review? Send us a message and we'll reply within 48 business hours.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+      <!-- Contact Info -->
+      <div class="md:col-span-5 space-y-6">
+        <div class="bg-slate-50 border border-slate-100 rounded-2xl p-6">
+          <h3 class="font-display font-bold text-slate-900 text-sm uppercase tracking-wider mb-4">Office Details</h3>
+          <ul class="space-y-4 text-sm text-slate-600">
+            <li class="flex items-start gap-3">
+              <span class="text-lg">📍</span>
+              <span>Kathmandu, Nepal</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-lg">✉️</span>
+              <a href="mailto:info@siza.dev" class="hover:text-tech-indigo transition">info@siza.dev</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="md:col-span-7 bg-white border border-slate-100 rounded-2xl p-6 md:p-8 shadow-sm">
+        <form id="contact-form" class="space-y-4">
+          <div>
+            <label for="contact-name" class="block text-xs font-bold font-display text-slate-700 uppercase mb-1">Full Name</label>
+            <input
+              type="text"
+              id="contact-name"
+              name="name"
+              required
+              class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-tech-indigo text-sm"
+              placeholder="Your name"
+            />
+          </div>
+          
+          <div>
+            <label for="contact-email" class="block text-xs font-bold font-display text-slate-700 uppercase mb-1">Email Address</label>
+            <input
+              type="email"
+              id="contact-email"
+              name="email"
+              required
+              class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-tech-indigo text-sm"
+              placeholder="your.email@gmail.com"
+            />
+          </div>
+          
+          <div>
+            <label for="contact-message" class="block text-xs font-bold font-display text-slate-700 uppercase mb-1">Your Message</label>
+            <textarea
+              id="contact-message"
+              name="message"
+              rows="5"
+              required
+              class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-tech-indigo text-sm"
+              placeholder="Write your query here..."
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white font-display font-semibold rounded-xl transition text-sm active:scale-[0.98]"
+          >
+            Send Message
+          </button>
+        </form>
+
+        <div id="contact-success" class="hidden mt-4 text-emerald-600 text-sm font-semibold">
+          ✅ Thank you! Your message has been sent successfully.
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const success = document.getElementById('contact-success');
+
+  if (form && success) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Logic for form endpoint injection (e.g. email API or serverless functions)
+      success.classList.remove('hidden');
+      form.reset();
+    });
+  }
+</script>

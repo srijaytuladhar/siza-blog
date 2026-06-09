@@ -1,0 +1,33 @@
+---
+interface Props {
+  slot?: string;
+  client?: string;
+  format?: 'auto' | 'fluid' | 'rectangle' | 'horizontal' | 'vertical';
+  responsive?: 'true' | 'false';
+  style?: string;
+}
+
+const {
+  slot = '1234567890',
+  // Replace this publisher ID with your Google AdSense Client ID (e.g. ca-pub-XXXXXXXXXXXXXXXX)
+  client = 'ca-pub-XXXXXXXXXXXXXXXX',
+  format = 'auto',
+  responsive = 'true',
+  style = 'display:block;'
+} = Astro.props;
+---
+
+<!-- Google AdSense Container Slot -->
+<div class="adsense-wrapper my-8 py-4 bg-slate-100/50 border border-dashed border-slate-300/60 rounded-lg flex flex-col items-center justify-center min-h-[100px] text-center overflow-hidden">
+  <span class="text-[10px] tracking-wider text-slate-400 font-mono mb-2 uppercase">Advertisement</span>
+  
+  <ins class="adsbygoogle"
+       style={style}
+       data-ad-client={client}
+       data-ad-slot={slot}
+       data-ad-format={format}
+       data-full-width-responsive={responsive}></ins>
+  <script is:inline>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>

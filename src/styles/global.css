@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-100 selection:text-brand-900;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-semibold tracking-tight text-slate-900;
+  }
+}
+
+/* Custom Markdown Content Typography styling for scannability & premium aesthetics */
+.prose {
+  @apply text-slate-700 leading-relaxed text-[16px] md:text-[17px];
+}
+
+.prose p {
+  @apply mb-6;
+}
+
+.prose h2 {
+  @apply text-2xl md:text-3xl mt-10 mb-4 font-semibold text-slate-900 border-b border-slate-200/80 pb-2;
+}
+
+.prose h3 {
+  @apply text-xl md:text-2xl mt-8 mb-3 font-semibold text-slate-900;
+}
+
+.prose ul {
+  @apply list-disc pl-6 mb-6 space-y-2 text-slate-700;
+}
+
+.prose ol {
+  @apply list-decimal pl-6 mb-6 space-y-2 text-slate-700;
+}
+
+.prose li strong {
+  @apply text-slate-900 font-semibold;
+}
+
+/* Styled Table element */
+.prose table {
+  @apply w-full text-left border-collapse my-8 overflow-hidden rounded-lg shadow-sm border border-slate-200/80;
+}
+
+.prose th {
+  @apply bg-slate-100 text-slate-800 font-display font-semibold text-sm px-4 py-3 border-b border-slate-200;
+}
+
+.prose td {
+  @apply px-4 py-3 text-sm text-slate-600 border-b border-slate-100 bg-white;
+}
+
+.prose tr:last-child td {
+  @apply border-b-0;
+}
+
+.prose tr:hover td {
+  @apply bg-slate-50/60;
+}
+
+/* Stylized Tech Blockquotes & Warning Callouts */
+.prose blockquote {
+  @apply border-l-4 border-amber-500 bg-amber-50/70 text-amber-900 px-5 py-4 my-6 rounded-r-lg italic shadow-sm relative overflow-hidden;
+}
+
+.prose blockquote::before {
+  content: '⚠️ WARNING';
+  @apply block not-italic font-display font-bold text-xs uppercase tracking-wider text-amber-800 mb-1.5;
+}
+
+.prose blockquote.notice {
+  @apply border-l-4 border-tech-accent bg-brand-50/60 text-brand-950 px-5 py-4 my-6 rounded-r-lg italic shadow-sm;
+}
+
+.prose blockquote.notice::before {
+  content: '💡 DEV NOTE';
+  @apply block not-italic font-display font-bold text-xs uppercase tracking-wider text-brand-800 mb-1.5;
+}
+
+/* Code Syntax highlighting & Inline Code styling */
+.prose pre {
+  @apply bg-slate-900 text-slate-100 p-4 rounded-lg overflow-x-auto my-6 border border-slate-800 font-mono text-sm;
+}
+
+.prose code {
+  @apply bg-slate-100 text-rose-600 px-1.5 py-0.5 rounded text-[14px] font-mono font-medium border border-slate-200/60;
+}
+
+.prose pre code {
+  @apply bg-transparent text-slate-100 p-0 rounded-none border-0 text-[13px];
+}

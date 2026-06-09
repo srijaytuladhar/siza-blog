@@ -1,0 +1,95 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  className?: string;
+}
+
+const {
+  title = "Get Weekly Dev & AI Insights",
+  description = "Join 10,000+ developers receiving actionable programming tips, Git workflows, free AI tools, and career guides directly in their inbox.",
+  className = ""
+} = Astro.props;
+---
+
+<div class={`bg-slate-900 text-white p-8 rounded-2xl border border-slate-800 shadow-xl relative overflow-hidden ${className}`}>
+  <!-- Decorative cyan glow background -->
+  <div class="absolute -top-12 -right-12 w-48 h-48 bg-tech-accent/20 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute -bottom-12 -left-12 w-48 h-48 bg-brand-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-xl">
+    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-tech-accent/20 text-tech-accent mb-4 border border-tech-accent/30 font-display">
+      🚀 Dev &amp; AI Newsletter
+    </span>
+    <h3 class="text-2xl font-display font-bold text-white mb-2 leading-tight">
+      {title}
+    </h3>
+    <p class="text-slate-300 text-sm md:text-base mb-6 leading-relaxed">
+      {description}
+    </p>
+
+    <!-- Subscription Form with state placeholders -->
+    <form id="newsletter-form" class="flex flex-col sm:flex-row gap-3">
+      <div class="flex-grow">
+        <label for="newsletter-email" class="sr-only">Email address</label>
+        <input
+          type="email"
+          id="newsletter-email"
+          name="email"
+          placeholder="Enter your email address"
+          required
+          class="w-full px-4 py-3 bg-slate-800/80 border border-slate-700/60 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-tech-accent focus:border-transparent transition text-sm"
+        />
+      </div>
+      <button
+        type="submit"
+        class="px-6 py-3 bg-tech-accent hover:bg-cyan-400 text-slate-950 font-semibold font-display rounded-xl transition shadow-lg shadow-cyan-500/10 active:scale-[0.98] text-sm whitespace-nowrap"
+      >
+        Subscribe Now
+      </button>
+    </form>
+    
+    <div id="newsletter-success" class="hidden mt-4 text-emerald-400 text-sm font-medium flex items-center gap-2">
+      ✅ Thank you! Please check your inbox to confirm your subscription.
+    </div>
+    <div id="newsletter-error" class="hidden mt-4 text-rose-400 text-sm font-medium flex items-center gap-2">
+      ❌ Something went wrong. Please try again.
+    </div>
+  </div>
+</div>
+
+<script>
+  // Simple frontend handler for demo and endpoint binding
+  const form = document.getElementById('newsletter-form') as HTMLFormElement | null;
+  const successEl = document.getElementById('newsletter-success');
+  const errorEl = document.getElementById('newsletter-error');
+
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const emailInput = document.getElementById('newsletter-email') as HTMLInputElement | null;
+      if (!emailInput) return;
+
+      const email = emailInput.value;
+
+      try {
+        // Placeholder for real subscription API integration (Resend, Loops, ConvertKit, etc.)
+        // Example:
+        // const response = await fetch('/api/subscribe', {
+        //   method: 'POST',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify({ email })
+        // });
+        // if (!response.ok) throw new Error();
+
+        // Simulate success for design verification
+        if (successEl) successEl.classList.remove('hidden');
+        if (errorEl) errorEl.classList.add('hidden');
+        form.reset();
+      } catch (err) {
+        if (errorEl) errorEl.classList.remove('hidden');
+        if (successEl) successEl.classList.add('hidden');
+      }
+    });
+  }
+</script>

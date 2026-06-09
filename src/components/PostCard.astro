@@ -1,0 +1,77 @@
+---
+interface Props {
+  post: {
+    slug: string;
+    data: {
+      title: string;
+      description: string;
+      pubDate: Date;
+      author: string;
+      image?: string;
+      tags: string[];
+      category?: string;
+    };
+  };
+}
+
+const { post } = Astro.props;
+const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+
+// Simple reading time estimator (e.g. 200 words per minute)
+const readTime = "5 min read"; 
+---
+
+<article class="bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group h-full relative">
+  <!-- Post Image -->
+  {post.data.image && (
+    <div class="aspect-[16/10] overflow-hidden bg-slate-100 relative">
+      <img
+        src={post.data.image}
+        alt={post.data.title}
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+        loading="lazy"
+      />
+      {post.data.category && (
+        <span class="absolute top-4 left-4 bg-slate-900/90 backdrop-blur-md text-white text-[11px] font-bold font-display px-2.5 py-1 rounded-lg uppercase tracking-wider">
+          {post.data.category}
+        </span>
+      )}
+    </div>
+  )}
+
+  <!-- Post Body Content -->
+  <div class="p-6 md:p-8 flex-grow flex flex-col">
+    <!-- Meta Info -->
+    <div class="flex items-center gap-3 text-xs text-slate-500 mb-3 font-medium">
+      <time datetime={post.data.pubDate.toISOString()}>{formattedDate}</time>
+      <span>&bull;</span>
+      <span>{readTime}</span>
+    </div>
+
+    <!-- Title -->
+    <h3 class="text-xl md:text-2xl font-bold font-display text-slate-900 group-hover:text-tech-indigo transition-colors line-clamp-2 leading-tight mb-3">
+      <a href={`/blog/${post.slug}`} class="focus:outline-none">
+        <span class="absolute inset-0 z-0"></span>
+        {post.data.title}
+      </a>
+    </h3>
+
+    <!-- Excerpt -->
+    <p class="text-slate-600 text-sm md:text-base line-clamp-3 mb-6 leading-relaxed">
+      {post.data.description}
+    </p>
+
+    <!-- Footer tags -->
+    <div class="mt-auto flex flex-wrap gap-1.5 relative z-10">
+      {post.data.tags.slice(0, 3).map((tag: string) => (
+        <span class="text-[11px] font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md">
+          #{tag}
+        </span>
+      ))}
+    </div>
+  </div>
+</article>

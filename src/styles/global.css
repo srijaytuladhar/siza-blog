@@ -95,3 +95,9 @@
 .prose pre code {
   @apply bg-transparent text-slate-100 p-0 rounded-none border-0 text-[13px];
 }
+
+/* Styled container for Mermaid diagrams */
+.mermaid {
+  @apply flex justify-center bg-white p-6 my-8 rounded-xl border border-slate-200/80 shadow-sm overflow-x-auto w-full select-none;
+}
+
